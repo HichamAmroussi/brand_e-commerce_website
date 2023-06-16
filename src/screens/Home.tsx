@@ -13,14 +13,16 @@ const Home = () => {
     const [isPending, setIsPending] = useState(true);
 
     useEffect(() => {
-        fetch("https://dummyjson.com/products")
-        .then((data) => data.json())
-        .then((response) => {
-            // Remove Loading Animation
-            setIsPending(false);
-            // Change Products State
-            setProducts(response.products);
-        });
+        fetch("https://fakestoreapi.com/products")
+            .then((data) => data.json())
+            .then((response) => {
+                const clothes = response.filter((item: any) => item.category === "women's clothing" || item.category === "men's clothing")
+                // Remove Loading Animation
+                setIsPending(false);
+                // Change Products State
+                setProducts(clothes);
+                console.log(clothes);
+            });
     }, []);
 
     return ( 
@@ -29,8 +31,9 @@ const Home = () => {
             <Navbar />
 
             {/* Section 1: Header */}
-            <section className="h-screen w-full bg-[url('../../public/slider-image-1.jpg')] bg-[-600px_0px] bg-cover sm:bg-top flex justify-center items-center">
-                <button className="text-sm font-medium border-2 border-black mt-80 py-4 px-10 hover:bg-white hover:border-white duration-300">SHOP NOW</button>
+            <section className="h-screen w-full bg-[url('../../public/slider-image-1.jpg')] bg-[-600px_0px] bg-cover sm:bg-top flex flex-col justify-center items-center gap-6 md:gap-8">
+                <h1 className="text-white mt-60 text-4xl leading-tight w-[14.2rem] md:text-black md:text-6xl md:w-96">Official Merch Available Now</h1>
+                <button className="text-white text-sm font-medium border-2 border-black py-4 px-10 hover:bg-white hover:border-white duration-300 md:text-black">SHOP NOW</button>
             </section>
 
             {/* Section 2: Offers */}
@@ -69,7 +72,7 @@ const Home = () => {
                         </li>
                     </ul>
 
-                    <main className="my-8 mx-3 grid grid-cols-2 gap-x-2.5 gap-y-3 xl:grid-cols-4 xl:gap-x-8 xl:gap-y-3 md:grid-cols-3">
+                    <main className="my-12 mx-3 grid grid-cols-2 gap-x-2.5 gap-y-3 xl:grid-cols-4 xl:gap-x-8 xl:gap-y-3 md:grid-cols-3 md:my-16">
                         {isPending && (
                             <div className="min-h-full w-full flex justify-center col-span-4">
                                 <div className="loading-animation"></div>
