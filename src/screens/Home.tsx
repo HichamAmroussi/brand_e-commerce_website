@@ -1,14 +1,31 @@
+import { useEffect, useState } from "react";
 // Components
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import ProductCard from "../components/ProductCard";
 // React Icons
 import { MdLocalShipping } from "react-icons/md";
 import { GiRolledCloth } from "react-icons/gi";
 import { BiSupport } from "react-icons/bi";
 
 const Home = () => {
+    const [products, setProducts] = useState<any[] | null>(null);
+    const [isPending, setIsPending] = useState(true);
+
+    useEffect(() => {
+        fetch("https://dummyjson.com/products")
+        .then((data) => data.json())
+        .then((response) => {
+            // Remove Loading Animation
+            setIsPending(false);
+            // Change Products State
+            setProducts(response.products);
+        });
+    }, []);
+
     return ( 
         <>
+            {/* Top Navigation Bar */}
             <Navbar />
 
             {/* Section 1: Header */}
@@ -42,7 +59,7 @@ const Home = () => {
                 <div className="max-w-7xl container mx-auto">
                     <ul className="flex md:gap-20 gap-10 justify-center">
                         <li>
-                            <button className="font-medium text-lg">All Products</button>
+                            <button className="text-green-600 font-medium text-lg">All Products</button>
                         </li>
                         <li>
                             <button className="font-medium text-lg">Hoodies</button>
@@ -53,37 +70,32 @@ const Home = () => {
                     </ul>
 
                     <main className="my-8 mx-3 grid grid-cols-2 gap-x-2.5 gap-y-3 xl:grid-cols-4 xl:gap-x-8 xl:gap-y-3 md:grid-cols-3">
-                        <a className="product-container">
-                            <figure className="relative pt-[100%]">
-                                <img src="/product-images/product1-image1.jpg" alt="Product Thumbnail" className="absolute top-0 bottom-0 right-0 left-0 w-full h-full object-cover" />
-                            </figure>
-                            <div className="text-center py-2 px-1">
-                                <p>Nike Airforce 1</p>
-                                <p>6000 DA</p>
+                        {isPending && (
+                            <div className="min-h-full w-full flex justify-center col-span-4">
+                                <div className="loading-animation"></div>
                             </div>
-                        </a>
-                        <a className="product-container">
-                            <figure className="relative pt-[100%]">
-                                <img src="/product-images/product2-image1.jpg" alt="Product Thumbnail" className="absolute top-0 bottom-0 right-0 left-0 w-full h-full object-cover" />
-                            </figure>
-                            <div className="text-center py-2 px-1">
-                                <p>Vans Old Skool</p>
-                                <p>4000 DA</p>
+                        )}
+
+                        {products &&
+                            products.length !== 0 &&
+                                products.map((product) => (
+                                <ProductCard
+                                    product={product}
+                                    key={product.id}
+                                />
+                            ))}
+
+                        {products && products.length === 0 && (
+                            <div>
+                                No Products are available.
                             </div>
-                        </a>
-                        <a className="product-container">
-                            <figure className="relative pt-[100%]">
-                                <img src="/product-images/product3-image1.jpg" alt="Product Thumbnail" className="absolute top-0 bottom-0 right-0 left-0 w-full h-full object-cover" />
-                            </figure>
-                            <div className="text-center py-2 px-1">
-                                <p>Vintage Gray T-shirt</p>
-                                <p>1200 DA</p>
-                            </div>
-                        </a>
+                        )}
+
                     </main>
                 </div>
             </section>
 
+            {/* Footer */}
             <Footer />
         </>
      );

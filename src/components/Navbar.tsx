@@ -18,7 +18,10 @@ const Navbar = () => {
 
     const handleClick = () => {
         setHamburgerClick(!hamburgerClick);
-        setActiveScroll(!activeScroll);
+
+        if(window.scrollY === 0) {
+            setActiveScroll(!activeScroll);
+        }
     }
 
     const handleMouseLeave = () => {
@@ -31,10 +34,11 @@ const Navbar = () => {
 
     return ( 
         <header>
-            <nav onMouseEnter={() => setActiveScroll(true)} onMouseLeave={handleMouseLeave} className={ 
-                activeScroll 
-                ? "bg-white p-5 w-full md:flex md:items-center md:justify-between fixed duration-500 z-10" 
-                : "text-white bg-transparent p-5 w-full md:flex md:items-center md:justify-between fixed duration-500 z-10" 
+            <nav onMouseEnter={() => setActiveScroll(true)} onMouseLeave={handleMouseLeave} 
+                className={ 
+                    activeScroll 
+                        ? "bg-white p-4 w-full md:p-5 md:flex md:items-center md:justify-between fixed duration-500 z-10" 
+                        : "text-white bg-transparent p-4 w-full md:p-5 md:flex md:items-center md:justify-between fixed duration-500 z-10" 
             }>
 
                 <div className="flex justify-between items-center">
@@ -52,7 +56,7 @@ const Navbar = () => {
                     ? "bg-white md:flex md:items-center z-[-1] md:z-auto md:static absolute w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-100 top-[80px] transition-all ease-in duration-300" : "bg-transparent md:flex md:items-center z-[-1] md:z-auto md:static absolute w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-300"
                 }>
                     <li className="mx-7 my-6 md:my-0">
-                        <a href="/" className="hover:text-green-600 duration-75">Home</a>
+                        <a href="/" className="text-green-600 hover:text-green-600 duration-75">Home</a>
                     </li>
                     <li className="mx-7 my-6 md:my-0">
                         <a href="/cart" className="hover:text-green-600 duration-75">Shop</a>
