@@ -31,7 +31,7 @@ const Home = () => {
             <Navbar />
 
             {/* Section 1: Header */}
-            <section className="h-screen w-full bg-[url('../../public/slider-image-1.jpg')] bg-[-600px_0px] bg-cover sm:bg-top flex flex-col justify-center items-center gap-6 2xl:gap-8">
+            <section className="h-screen w-full bg-[url('../../public/slider-image-1.jpg')] bg-[-550px_0px] bg-cover sm:bg-top flex flex-col justify-center items-center gap-5 2xl:gap-8">
                 <h1 className="text-white mt-60 md:mt-[15.5rem] 2xl:mt-64 text-4xl leading-tight w-[14.2rem] 2xl:text-6xl 2xl:w-96 md:text-5xl md:w-[19rem] 2xl:text-black">Official Merch Available Now</h1>
                 <button className="text-white text-sm font-medium border-2 border-black py-4 px-10 hover:bg-white hover:border-white duration-300 md:text-black">SHOP NOW</button>
             </section>
