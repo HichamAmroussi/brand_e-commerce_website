@@ -12,7 +12,7 @@ const Home = () => {
             <Navbar />
 
             {/* Section 1: Header */}
-            <section className="h-screen w-full bg-[url('./public/slider-image-1.jpg')] bg-[-600px_0px] bg-cover sm:bg-top flex justify-center items-center">
+            <section className="h-screen w-full bg-[url('../../public/slider-image-1.jpg')] bg-[-600px_0px] bg-cover sm:bg-top flex justify-center items-center">
                 <button className="text-sm font-medium border-2 border-black mt-80 py-4 px-10 hover:bg-white hover:border-white duration-300">SHOP NOW</button>
             </section>
 
