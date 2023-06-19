@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-// Components
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import ProductCard from "../components/ProductCard";
+import { Link } from "react-router-dom";
 // React Icons
 import { MdLocalShipping } from "react-icons/md";
 import { GiRolledCloth } from "react-icons/gi";
 import { BiSupport } from "react-icons/bi";
+// Components
+import ProductCard from "../components/ProductCard";
 
 const Home = () => {
     const [products, setProducts] = useState<any[] | null>(null);
@@ -27,13 +26,10 @@ const Home = () => {
 
     return ( 
         <>
-            {/* Top Navigation Bar */}
-            <Navbar />
-
             {/* Section 1: Header */}
             <section className="h-screen w-full bg-[url('../../public/slider-image-1.jpg')] bg-[-550px_0px] bg-cover sm:bg-top flex flex-col justify-center items-center gap-5 2xl:gap-8">
                 <h1 className="text-white mt-60 md:mt-[15.5rem] 2xl:mt-64 text-4xl leading-tight w-[14.2rem] 2xl:text-6xl 2xl:w-96 md:text-5xl md:w-[19rem] 2xl:text-black">Official Merch Available Now</h1>
-                <button className="text-white text-sm font-medium border-2 border-black py-4 px-10 hover:bg-white hover:border-white duration-300 md:text-black">SHOP NOW</button>
+                <Link to="/shop" className="text-white text-sm font-medium border-2 border-black py-4 px-10 hover:bg-white hover:border-white duration-300 md:text-black">SHOP NOW</Link>
             </section>
 
             {/* Section 2: Offers */}
@@ -62,13 +58,13 @@ const Home = () => {
                 <div className="max-w-7xl container mx-auto">
                     <ul className="flex md:gap-20 gap-10 justify-center">
                         <li>
-                            <button className="text-green-600 font-medium text-lg">All Products</button>
+                            <button className="text-green-600 font-medium text-lg hover:text-green-600 duration-300">All Products</button>
                         </li>
                         <li>
-                            <button className="font-medium text-lg">Hoodies</button>
+                            <button className="font-medium text-lg hover:text-green-600 duration-300">Hoodies</button>
                         </li>
                         <li>
-                            <button className="font-medium text-lg">Tracksuits</button>
+                            <button className="font-medium text-lg hover:text-green-600 duration-300">Tracksuits</button>
                         </li>
                     </ul>
 
@@ -97,9 +93,6 @@ const Home = () => {
                     </main>
                 </div>
             </section>
-
-            {/* Footer */}
-            <Footer />
         </>
      );
 }

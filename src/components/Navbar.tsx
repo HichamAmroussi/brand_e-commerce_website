@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useMatch, useResolvedPath } from "react-router-dom";
 // React Icons
 import { FiShoppingCart } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -8,12 +9,17 @@ const Navbar = () => {
     const [activeScroll, setActiveScroll] = useState(false);
     const [hamburgerClick, setHamburgerClick] = useState(false);
 
-    const handleScroll = () => {
-        if(window.scrollY > 0) {
-            setActiveScroll(true);
-        } else {
-            setActiveScroll(false);
-        }
+    const CustomLink = ({ to, children, ...props }: any) => {
+        const resolvedPath = useResolvedPath(to);
+        const isActive = useMatch({ path: resolvedPath.pathname, end: true });
+
+        return (
+            <li className={isActive ? "text-green-600" : ""}>
+                <Link to ={to} {...props}>
+                    {children}
+                </Link>
+            </li>
+        )
     }
 
     const handleClick = () => {
@@ -29,6 +35,14 @@ const Navbar = () => {
             setActiveScroll(false);
         }
     }
+
+    const handleScroll = () => {
+        if(window.scrollY > 0) {
+            setActiveScroll(true);
+        } else {
+            setActiveScroll(false);
+        }
+    }
     
     window.addEventListener('scroll', handleScroll);
 
@@ -41,39 +55,36 @@ const Navbar = () => {
                         : "text-white bg-transparent p-4 w-full md:p-5 md:flex md:items-center md:justify-between fixed duration-500 z-10" 
             }>
 
+                {/* Logo */}
                 <div className="flex justify-between items-center">
-                    <a href="/" className="md:mx-10">
+                    <Link to="/" className="md:mx-10">
                         <img className="h-20 inline" src="logo.png" alt="Website Logo" />
-                    </a>
+                    </Link>
 
                     <span className="text-3xl cursor-pointer mx-2 md:hidden block" onClick={handleClick}>
                         {hamburgerClick? <IoClose /> : <GiHamburgerMenu />}
                     </span>
                 </div>
 
+                {/* Middle Menu */}
                 <ul className={
                     hamburgerClick 
                     ? "bg-white md:flex md:items-center z-[-1] md:z-auto md:static absolute w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-100 top-[80px] transition-all ease-in duration-300" : "bg-transparent md:flex md:items-center z-[-1] md:z-auto md:static absolute w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-300"
                 }>
-                    <li className="mx-7 my-6 md:my-0">
-                        <a href="/" className="text-green-600 hover:text-green-600 duration-75">Home</a>
-                    </li>
-                    <li className="mx-7 my-6 md:my-0">
-                        <a href="/cart" className="hover:text-green-600 duration-75">Shop</a>
-                    </li>
-                    <li className="mx-7 my-6 md:my-0">
-                        <a href="/contact-us" className="hover:text-green-600 duration-75">Contact us</a>
-                    </li>
+                    <CustomLink to="/" className="mx-7 my-6 hover:text-green-600 duration-75 md:my-0">Home</CustomLink>
+                    <CustomLink to="/shop" className="mx-7 my-6 hover:text-green-600 duration-75 md:my-0">Shop</CustomLink>
+                    <CustomLink to="/contact-us" className="mx-7 my-6 hover:text-green-600 duration-75 md:my-0">Contact us</CustomLink>
                 </ul>
 
-                <a href="/cart" className="gap-1.5 hidden md:flex md:mx-10">
+                {/* Cart */}
+                <Link to="/cart" className="gap-1.5 hidden md:flex md:mx-10">
                     <FiShoppingCart className="text-2xl" />
                     <div className={ 
                         activeScroll 
                             ? "bg-black text-white rounded-full px-2" 
                             : "text-black bg-white rounded-full px-2"
                     }>0</div>
-                </a>
+                </Link>
             </nav>
         </header>
      );

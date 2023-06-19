@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 interface ProductProps {
     product: {
         id: number;
@@ -14,8 +16,12 @@ interface ProductProps {
   }
 
 const ProductCard = ({ product }: ProductProps) => {
+    const makeLink = () => {
+        return "/products/" + product.title.toLocaleLowerCase().replace(/ /g, "-");
+    }
+
     return ( 
-        <a className="product-container">
+        <Link to={makeLink()} className="product-container">
             <figure className="relative pt-[100%]">
                 <img src={product.image} alt={product.title} className="absolute top-0 bottom-0 right-0 left-0 w-full h-full object-contain" />
             </figure>
@@ -23,7 +29,7 @@ const ProductCard = ({ product }: ProductProps) => {
                 <p className="font-medium">{product.title}</p>
                 <p className="font-bold py-2">{product.price} $</p>
             </div>
-        </a>
+        </Link>
      );
 }
  
