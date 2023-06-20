@@ -14,7 +14,7 @@ const Navbar = () => {
         const isActive = useMatch({ path: resolvedPath.pathname, end: true });
 
         return (
-            <li className={isActive ? "text-green-600" : ""}>
+            <li className={isActive ? "text-green-600 my-6 md:my-0:" : "my-6 md:my-0"}>
                 <Link to ={to} {...props}>
                     {children}
                 </Link>
@@ -56,14 +56,14 @@ const Navbar = () => {
             }>
 
                 {/* Logo */}
-                <div className="flex justify-between items-center">
+                <div className="flex items-center">
+                    <span className="text-3xl block cursor-pointer mx-0 md:mx-2 md:hidden" onClick={handleClick}>
+                        {hamburgerClick? <IoClose /> : <GiHamburgerMenu />}
+                    </span>
+
                     <Link to="/" className="md:mx-10">
                         <img className="h-20 inline" src="logo.png" alt="Website Logo" />
                     </Link>
-
-                    <span className="text-3xl cursor-pointer mx-2 md:hidden block" onClick={handleClick}>
-                        {hamburgerClick? <IoClose /> : <GiHamburgerMenu />}
-                    </span>
                 </div>
 
                 {/* Middle Menu */}
@@ -71,13 +71,13 @@ const Navbar = () => {
                     hamburgerClick 
                     ? "bg-white md:flex md:items-center z-[-1] md:z-auto md:static absolute w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-100 top-[80px] transition-all ease-in duration-300" : "bg-transparent md:flex md:items-center z-[-1] md:z-auto md:static absolute w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-300"
                 }>
-                    <CustomLink to="/" className="mx-7 my-6 hover:text-green-600 duration-75 md:my-0">Home</CustomLink>
-                    <CustomLink to="/shop" className="mx-7 my-6 hover:text-green-600 duration-75 md:my-0">Shop</CustomLink>
-                    <CustomLink to="/contact-us" className="mx-7 my-6 hover:text-green-600 duration-75 md:my-0">Contact us</CustomLink>
+                    <CustomLink to="/" className="mx-7 hover:text-green-600 duration-75">Home</CustomLink>
+                    <CustomLink to="/shop" className="mx-7 hover:text-green-600 duration-75">Shop</CustomLink>
+                    <CustomLink to="/contact-us" className="mx-7 hover:text-green-600 duration-75">Contact us</CustomLink>
                 </ul>
 
                 {/* Cart */}
-                <Link to="/cart" className="gap-1.5 hidden md:flex md:mx-10">
+                <Link to="/cart" className="gap-1.5 flex absolute top-[38px] right-6 md:static md:mx-10">
                     <FiShoppingCart className="text-2xl" />
                     <div className={ 
                         activeScroll 
