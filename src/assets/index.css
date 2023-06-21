@@ -2,6 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/*---------------------------------- Swiper -----------------------------------------*/
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.swiper .swiper-pagination-bullet{
+  background-color: white;
+  width: 10px;
+  height: 10px;
+}
+
+.swiper .swiper-button-next{
+  color: white;
+}
+.swiper .swiper-button-prev{
+  color: white;
+}
+
 /*-------------------------------- Loading Animation --------------------------------*/
 .loading-animation {
     width: 60px;

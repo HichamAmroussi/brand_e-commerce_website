@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+// @ts-ignore
+import { EffectFade, Navigation, Pagination, Autoplay } from 'swiper';
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 // React Icons
 import { MdLocalShipping } from "react-icons/md";
 import { GiRolledCloth } from "react-icons/gi";
@@ -27,10 +34,43 @@ const Home = () => {
     return ( 
         <>
             {/* Section 1: Header */}
+            <section className="relative">
+                <Swiper
+                    loop={true}
+                    centeredSlides={true}
+                    autoplay={{
+                        delay: 4000,
+                        disableOnInteraction: false,
+                    }}
+                    spaceBetween={30}
+                    effect={"fade"}
+                    navigation={true}
+                    pagination={{
+                        clickable: true,
+                    }}
+                    modules={[Autoplay, EffectFade, Navigation, Pagination]}
+                    className="mySwiper"
+                >
+                    <SwiperSlide>
+                        <img src="slider-image-1.jpg" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <img src="slider-image-2.jpg" />
+                    </SwiperSlide>
+                </Swiper>
+                
+                <div className="absolute bottom-[30%] left-[50%] translate-x-[-50%] z-10 flex gap-5 flex-col items-center sm:gap-8">
+                    <h1 className="text-white text-4xl leading-tight w-[14.2rem] 2xl:text-6xl 2xl:w-96 md:text-5xl md:w-[19rem]">Official Merch Available Now</h1>
+                    <Link to="/shop" className="text-white text-sm font-medium border-2 border-black py-4 px-10 hover:bg-white hover:border-white duration-300">SHOP NOW</Link>
+                </div>
+            </section>
+
+            {/* OLD VERSION
             <section className="h-screen w-full bg-[url('../../public/slider-image-1.jpg')] bg-[-550px_0px] bg-cover sm:bg-top flex flex-col justify-center items-center gap-5 2xl:gap-8">
                 <h1 className="text-white mt-60 md:mt-[15.5rem] 2xl:mt-64 text-4xl leading-tight w-[14.2rem] 2xl:text-6xl 2xl:w-96 md:text-5xl md:w-[19rem] 2xl:text-black">Official Merch Available Now</h1>
                 <Link to="/shop" className="text-white text-sm font-medium border-2 border-black py-4 px-10 hover:bg-white hover:border-white duration-300 md:text-black">SHOP NOW</Link>
             </section>
+            */}
 
             {/* Section 2: Offers */}
             <section className="py-16 md:py-24">
