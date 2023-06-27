@@ -62,7 +62,7 @@ const Navbar = () => {
                     </span>
 
                     <Link to="/" className="md:mx-10">
-                        <img className="h-20 inline" src="../../public/logo.png" alt="Website Logo" />
+                        <img className="h-20 inline" src="logo.png" alt="Website Logo" />
                     </Link>
                 </div>
 
