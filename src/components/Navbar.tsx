@@ -51,8 +51,8 @@ const Navbar = () => {
             <nav onMouseEnter={() => setActiveScroll(true)} onMouseLeave={handleMouseLeave} 
                 className={ 
                     activeScroll 
-                        ? "bg-white p-4 w-full md:p-5 md:flex md:items-center md:justify-between fixed duration-500 z-10" 
-                        : "text-white bg-transparent p-4 w-full md:p-5 md:flex md:items-center md:justify-between fixed duration-500 z-10" 
+                        ? "bg-white p-4 w-full md:p-5 md:flex md:items-center md:justify-between fixed duration-500 z-20" 
+                        : "text-white bg-transparent p-4 w-full md:p-5 md:flex md:items-center md:justify-between fixed duration-500 z-20" 
             }>
 
                 {/* Logo */}
@@ -62,7 +62,7 @@ const Navbar = () => {
                     </span>
 
                     <Link to="/" className="md:mx-10">
-                        <img className="h-20 inline" src="logo.png" alt="Website Logo" />
+                        <img className="h-20 inline" src="../../public/logo.png" alt="Website Logo" />
                     </Link>
                 </div>
 

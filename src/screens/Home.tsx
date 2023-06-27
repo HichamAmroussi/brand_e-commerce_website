@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// Packages
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 // @ts-ignore
@@ -13,23 +13,24 @@ import { GiRolledCloth } from "react-icons/gi";
 import { BiSupport } from "react-icons/bi";
 // Components
 import ProductCard from "../components/ProductCard";
+// Custom Hooks
+import useFetch from "../hooks/useFetch";
+// Interfaces
+interface Product {
+    id: number;
+    title: string;
+    price: number;
+    description: string;
+    category: string;
+    image: string;
+    rating: {
+        rate: number;
+        count: number;
+    }
+}
 
 const Home = () => {
-    const [products, setProducts] = useState<any[] | null>(null);
-    const [isPending, setIsPending] = useState(true);
-
-    useEffect(() => {
-        fetch("https://fakestoreapi.com/products")
-            .then((data) => data.json())
-            .then((response) => {
-                const clothes = response.filter((item: any) => item.category === "women's clothing" || item.category === "men's clothing")
-                // Remove Loading Animation
-                setIsPending(false);
-                // Change Products State
-                setProducts(clothes);
-                console.log(clothes);
-            });
-    }, []);
+    const [products, isPending] = useFetch<Product[]>("/products", []);
 
     return ( 
         <>
@@ -64,13 +65,6 @@ const Home = () => {
                     <Link to="/shop" className="text-white text-sm font-medium border-2 border-black py-4 px-10 hover:bg-white hover:border-white duration-300">SHOP NOW</Link>
                 </div>
             </section>
-
-            {/* OLD VERSION
-            <section className="h-screen w-full bg-[url('../../public/slider-image-1.jpg')] bg-[-550px_0px] bg-cover sm:bg-top flex flex-col justify-center items-center gap-5 2xl:gap-8">
-                <h1 className="text-white mt-60 md:mt-[15.5rem] 2xl:mt-64 text-4xl leading-tight w-[14.2rem] 2xl:text-6xl 2xl:w-96 md:text-5xl md:w-[19rem] 2xl:text-black">Official Merch Available Now</h1>
-                <Link to="/shop" className="text-white text-sm font-medium border-2 border-black py-4 px-10 hover:bg-white hover:border-white duration-300 md:text-black">SHOP NOW</Link>
-            </section>
-            */}
 
             {/* Section 2: Offers */}
             <section className="py-16 md:py-24">
@@ -115,19 +109,17 @@ const Home = () => {
                             </div>
                         )}
 
-                        {products &&
-                            products.length !== 0 &&
-                                products.map((product) => (
+                        {!isPending && products.length !== 0 &&
+                            products.filter((item: Product) => item.category === "women's clothing" || item.category === "men's clothing").map((product) => (
                                 <ProductCard
                                     product={product}
                                     key={product.id}
                                 />
-                            ))}
+                            ))
+                        }
 
-                        {products && products.length === 0 && (
-                            <div>
-                                No Products are available.
-                            </div>
+                        {!isPending && products.length === 0 && (
+                            <div>No Products are available.</div>
                         )}
 
                     </main>

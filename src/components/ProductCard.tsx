@@ -13,11 +13,12 @@ interface ProductProps {
             count: number;
         }
     }
-  }
+}
 
 const ProductCard = ({ product }: ProductProps) => {
     const makeLink = () => {
-        return "/products/" + product.title.toLocaleLowerCase().replace(/ /g, "-");
+        return "/products/" + product.id;
+        //return "/products/" + product.title.toLocaleLowerCase().replace(/ /g, "-");
     }
 
     return ( 
