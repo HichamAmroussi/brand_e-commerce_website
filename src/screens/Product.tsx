@@ -16,7 +16,7 @@ interface ProductProps {
 
 const Product = () => {
     const productID = window.location.pathname.slice(10);
-    const [product, isPending] = useFetch<ProductProps>(`/products/${productID}`, {} as ProductProps);
+    const [product] = useFetch<ProductProps>(`/products/${productID}`, {} as ProductProps);
     console.log(product);
 
 
