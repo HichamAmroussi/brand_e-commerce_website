@@ -62,7 +62,7 @@ const Home = () => {
                 
                 <div className="absolute bottom-[30%] left-[50%] translate-x-[-50%] z-10 flex gap-5 flex-col items-center sm:gap-8">
                     <h1 className="text-white text-4xl leading-tight w-[14.2rem] 2xl:text-6xl 2xl:w-96 md:text-5xl md:w-[19rem]">Official Merch Available Now</h1>
-                    <Link to="/shop" className="text-white text-sm font-medium border-2 border-black py-4 px-10 hover:bg-white hover:border-white duration-300">SHOP NOW</Link>
+                    <Link to="/shop" className="text-white text-sm font-medium border-2 border-black py-4 px-10 hover:text-black hover:bg-white hover:border-white duration-300">SHOP NOW</Link>
                 </div>
             </section>
 
